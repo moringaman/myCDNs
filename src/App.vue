@@ -1,7 +1,7 @@
 <template>
   <div class="col-sm-12">
     <app-header @searchCDN="fetchData"></app-header>
-   <app-cdn-list :searchData="searchData"></app-cdn-list>
+   <app-cdn-list :searchData="searchData" @cdnCopied='copyCDN'></app-cdn-list>
   </div>
 </template>
 
@@ -28,6 +28,10 @@ export default {
         this.searchData = response.data.results;
          console.log(response);
       })
+    },
+    copyCDN (index){
+    this.$clipboard(this.searchData[index].latest);
+      console.log(this.searchData[index].latest);
     }
   }
 }

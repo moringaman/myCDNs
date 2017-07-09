@@ -2,7 +2,8 @@
 <div>
    
    <div class="row">
-    <app-cdn v-for=" (search,index) in searchData" :key="index">
+    <app-cdn v-for=" (search,index) in searchData" :key="search.name"
+     @click.native="copyCDN(index)" >
        <h3> {{search.name}}</h3><p>({{search.version}})<p>
        
        <hr>
@@ -13,6 +14,7 @@
 </template>
 
 <script>
+
 import Cdn from './Cdn.vue'
 export default {
     props: ['searchData'],
@@ -23,6 +25,11 @@ export default {
     },
     components: {
         appCdn: Cdn
+    },
+    methods: {
+        copyCDN(index){
+            this.$emit('cdnCopied', index);
+        }
     }
 }
 </script>
